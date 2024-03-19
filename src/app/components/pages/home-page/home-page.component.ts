@@ -26,6 +26,7 @@ import { SpinnerService } from '../../../services/spinner.service';
     ]),
   ],
 })
+
 export class HomePageComponent implements OnInit {
   columnNames: { [key: string]: string } = {
     'licensePlate': 'License Plate',

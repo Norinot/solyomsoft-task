@@ -78,7 +78,6 @@ export class AttachRoutePageComponent {
     const endLocation = this.routeAttachForm.get('endLocation')?.value;
     const customerLocation = this.routeAttachForm.get('customerLocation')?.value;
     const kilometersTraveled = this.routeAttachForm.get('kilometersTraveled')?.value;
-    console.log(date);
 
     this.firebaseService.attachRoute(carId, date, startLocation, endLocation, customerLocation, kilometersTraveled)
       .then(() => {
