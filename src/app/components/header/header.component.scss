@@ -1,0 +1,17 @@
+mat-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  span {
+    border: 1px solid black;
+    padding: 4px;
+    border-radius: 6px;
+    background-color: #c2185b;
+
+    &:hover {
+      background-color: #ad1457;
+      cursor: pointer;
+    }
+  }
+}

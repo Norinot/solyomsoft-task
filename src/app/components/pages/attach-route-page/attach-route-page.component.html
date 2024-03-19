@@ -1,0 +1,132 @@
+<div class="upload-container">
+  <h2>Új útvonal hozzáadása:</h2>
+  <form [formGroup]="routeAttachForm" (ngSubmit)="attachRoute()">
+    <mat-form-field required>
+      <mat-label>Autó kiválasztása</mat-label>
+      <mat-select formControlName="car">
+        @for (car of cars; track cars) {
+        <mat-option [value]="car.id">{{car.licensePlate}}</mat-option>
+        }
+      </mat-select>
+      @if (getControl('car').invalid) {
+      <mat-error>{{getErrorMessage(getControl('car'))}}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (getControl('date').invalid) {
+      <mat-error>{{getErrorMessage(getControl('date'))}}</mat-error>
+      }
+    </mat-form-field>
+    <div formGroupName="startLocation">
+      <h3>Honnan:</h3>
+      <div formGroupName="address">
+        <mat-form-field>
+          <input matInput placeholder="Város" formControlName="city" required>
+          @if (getControl('startLocation.address.city').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.address.city'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Utca" formControlName="street" required>
+          @if (getControl('startLocation.address.street').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.address.street'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Házszám" formControlName="number" required>
+          <mat-hint align="end">Az érték csak szám lehet</mat-hint>
+          @if (getControl('startLocation.address.number').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.address.number'))}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Egyéb" formControlName="description" required>
+          @if (getControl('startLocation.description').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.description'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Törzsadat" formControlName="notMasterData" required>
+          @if (getControl('startLocation.notMasterData').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.notMasterData'))}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div formGroupName="endLocation">
+      <h3>Hová:</h3>
+      <div formGroupName="address">
+        <mat-form-field>
+          <input matInput placeholder="Város" formControlName="city" required>
+          @if (getControl('endLocation.address.city').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.address.city'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Utca" formControlName="street" required>
+          @if (getControl('endLocation.address.street').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.address.street'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Házszám" formControlName="number" required>
+          <mat-hint align="end">Az érték csak szám lehet</mat-hint>
+          @if (getControl('endLocation.address.number').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.address.number'))}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Egyéb" formControlName="description" required>
+          @if (getControl('endLocation.description').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.description'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Törzsadat" formControlName="notMasterData" required>
+          @if (getControl('endLocation.notMasterData').invalid) {
+          <mat-error>{{getErrorMessage(getControl('startLocation.notMasterData'))}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div formGroupName="customerLocation">
+      <h3>Partner:</h3>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Egyéb" formControlName="description" required>
+          @if (getControl('customerLocation.description').invalid) {
+          <mat-error>{{getErrorMessage(getControl('customerLocation.description'))}}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Törzsadat" formControlName="notMasterData" required>
+          @if (getControl('endLocation.notMasterData').invalid) {
+          <mat-error>{{getErrorMessage(getControl('customerLocation.notMasterData'))}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <input matInput placeholder="Megtett kilóméterek" formControlName="kilometersTraveled" required>
+      <mat-hint align="end">Az érték csak szám lehet</mat-hint>
+      @if (getControl('kilometersTraveled').invalid) {
+      <mat-error>{{getErrorMessage(getControl('kilometersTraveled'))}}</mat-error>
+      }
+    </mat-form-field>
+
+    <button class="submitButton" color="primary" mat-raised-button type="submit"
+      [disabled]="routeAttachForm.invalid">Küldés</button>
+  </form>
+</div>

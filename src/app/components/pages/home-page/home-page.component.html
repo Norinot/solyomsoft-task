@@ -1,0 +1,74 @@
+<div>
+  <mat-form-field>
+    <mat-label>Autó kiválasztása</mat-label>
+    <mat-select [formControl]="carControl">
+      <mat-option value="none">None</mat-option>
+      @for (car of cars; track cars) {
+      <mat-option [value]="car.id">{{car.licensePlate}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    @for (column of columnsToDisplay; track column) {
+    <ng-container matColumnDef="{{column}}">
+      <th mat-header-cell *matHeaderCellDef> {{columnNames[column]}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+    }
+    <ng-container matColumnDef="expanded">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="expand row"
+          (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+          @if (expandedElement === element) {
+          <mat-icon>keyboard_arrow_up</mat-icon>
+          } @else {
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          }
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          @for (route of element.routes; track $index) {
+          <div class="example-element-diagram">
+            <div>Dátum: {{route.date | date: 'short'}}</div>
+            <div>Indulási cím: {{route.startLocation.address.city}}, {{route.startLocation.address.street}},
+              {{route.startLocation.address.number}}
+              <div>
+                <div>Egyéb leírás: {{route.startLocation.description}} </div>
+                <div>Nem törzsadat: {{route.startLocation.notMasterData}} </div>
+              </div>
+            </div>
+            <div>Uticél: {{route.endLocation.address.city}}, {{route.endLocation.address.street}},
+              {{route.endLocation.address.number}}
+              <div>
+                <div>Egyéb leírás: {{route.endLocation.description}} </div>
+                <div>Nem törzsadat: {{route.endLocation.notMasterData}} </div>
+              </div>
+            </div>
+            <div>
+              <div>Partner egyéb leírása: {{route.customerLocation.description}} </div>
+              <div>Partner nem törzsadat: {{route.customerLocation.notMasterData}} </div>
+            </div>
+            <div>Megtett távolság: {{route.kilometersTraveled}}km</div>
+          </div>
+          }
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+  <div>Összesen elhasznált üzemanyag: {{totalFuelConsumption}}</div>
+  <div>Összes megtett km: {{totalKilometers}} </div>
+</div>

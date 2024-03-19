@@ -1,0 +1,30 @@
+<div class="upload-container">
+  <h2>Új jármű felvétele:</h2>
+  <form [formGroup]="carUploadForm" (ngSubmit)="uploadCar()">
+    <mat-form-field>
+      <mat-label>Rendszám:</mat-label>
+      <input matInput placeholder="Pl.: AABP-000" [formControl]="licensePlate" required>
+      @if (licensePlate.invalid) {
+      <mat-error>{{getErrorMessage(licensePlate)}}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Típus</mat-label>
+      <input matInput [formControl]="type" required>
+      @if (type.invalid) {
+      <mat-error>{{getErrorMessage(type)}}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fogyasztás(liter/100km) </mat-label>
+      <input matInput placeholder="Pl.: 3" [formControl]="fuelConsumption" required>
+      <mat-hint align="end">Az értéknek számnak kell lennie</mat-hint>
+      @if (fuelConsumption.invalid) {
+      <mat-error>{{getErrorMessage(fuelConsumption)}}</mat-error>
+      }
+    </mat-form-field>
+
+    <button color="primary" mat-raised-button type="submit" [disabled]="carUploadForm.invalid">Küldés</button>
+
+  </form>
+</div>

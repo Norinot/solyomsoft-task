@@ -1,0 +1,10 @@
+<mat-toolbar>
+  <span routerLink="/">Nyilvántartó Rendszer</span>
+  <button mat-mini-fab color="primary" aria-label="Add a new car" [matMenuTriggerFor]="menu">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/upload-car">Jármű feltöltése</button>
+    <button mat-menu-item routerLink="/attach-route">Uticél rögzítése</button>
+  </mat-menu>
+</mat-toolbar>
