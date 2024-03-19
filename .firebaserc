@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "solyomsoft-task": {
+      "hosting": {
+        "solyomsoft-task": [
+          "solyomsoft-task"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "solyomsoft-task"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "solyomsoft-task",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

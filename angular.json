@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -90,10 +91,28 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "solyomsoft-task:build:production",
+              "serveTarget": "solyomsoft-task:serve:production"
+            },
+            "development": {
+              "buildTarget": "solyomsoft-task:build:development",
+              "serveTarget": "solyomsoft-task:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
