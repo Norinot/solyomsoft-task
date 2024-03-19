@@ -11,7 +11,7 @@ describe('SpinnerOverlayComponent', () => {
       imports: [SpinnerOverlayComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SpinnerOverlayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
